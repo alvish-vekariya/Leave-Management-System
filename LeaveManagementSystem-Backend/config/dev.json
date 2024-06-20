@@ -1,0 +1,5 @@
+{
+    "PORT" : 3000,
+    "SECRETE_KEY" : "LeaveManagementSystem",
+    "MONGO_URL" : "mongodb+srv://alvish:mongo_practice@practice.05kpole.mongodb.net/Leave_Management?retryWrites=true&w=majority&appName=practice"
+}

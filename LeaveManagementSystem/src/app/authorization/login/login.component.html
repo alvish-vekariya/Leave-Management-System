@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+        <div class="col-auto min-vh-100 d-flex align-items-center">
+            <div class="card">
+                <div class="card-header text-center">Login</div>
+                <div class="card-body">
+                    <form action="" [formGroup]="loginForm" (submit)="loginSubmit()">
+                        <div class="form-floating mt-2">
+                            <input type="text" name="" id="username" formControlName="username" class="form-control" placeholder="Username" [ngClass]="{'is-invalid': this.loginForm.controls.username.touched && this.loginForm.controls.username.invalid, 'is-valid': this.loginForm.controls.username.valid}">
+                            <label for="username">Username</label>
+                            <span *ngIf="this.loginForm.controls.username.errors && (this.loginForm.controls.username.touched || this.loginForm.controls.username.dirty)">
+                                <span *ngIf="this.loginForm.controls.username.errors?.['required']" class="text-danger">** username is required</span>
+                                <span *ngIf="this.loginForm.controls.username.errors?.['pattern']" class="text-danger">** should contains characters only</span>
+                            </span>
+                        </div>
+                        <div class="form-floating mt-3">
+                            <input type="password" name="" id="password" formControlName="password" class="form-control" placeholder="password" [ngClass]="{'is-invalid': this.loginForm.controls.password.touched && this.loginForm.controls.password.invalid, 'is-valid': this.loginForm.controls.password.valid}">
+                            <label for="password">Password</label>
+                            <span *ngIf="this.loginForm.controls.password.errors && (this.loginForm.controls.password.touched || this.loginForm.controls.password.dirty)">
+                                <span *ngIf="this.loginForm.controls.password.errors?.['required']" class="text-danger">** password is required</span>
+                                <span *ngIf="this.loginForm.controls.password.errors?.['minlength']" class="text-danger">** length atleast 8</span>
+                            </span>
+                        </div>
+                        <div class="mt-2">
+                            Don't have an Account? <a routerLink="/signup">Signup</a>
+                        </div>
+                        <div class="mt-3 text-center">
+                            <input type="submit" value="Login" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
