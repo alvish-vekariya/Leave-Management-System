@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { ColDef } from 'ag-grid-community';
+import { ActionsComponent } from 'src/app/shared/actions/actions.component';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -28,6 +29,11 @@ export class AdminDashboardComponent {
     {field : "endDate"},
     {field : "reason"},
     {field : "totalDays"},
-    {field : "status"}
+    {field : "status"},
+    {field : "actions", cellRenderer : ActionsComponent, cellRendererParams : {acceptfunction : (id: string)=>{ this.accept(id)}}}
   ] 
+
+  accept(id: string){
+    console.log(id)
+  }
 }

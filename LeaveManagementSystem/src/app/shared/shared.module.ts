@@ -15,7 +15,8 @@ import { ActionsComponent } from './actions/actions.component';
     AgGridAngular
   ],
   exports:[
-    DatatableComponent
+    DatatableComponent,
+    ActionsComponent
   ]
 })
 export class SharedModule {}
