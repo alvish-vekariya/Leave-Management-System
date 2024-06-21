@@ -11,7 +11,7 @@ const server = new InversifyExpressServer(container);
 server.setConfig(app=>{
     app.use(express.json());
     app.use(cors({
-        origin : "http://localhost:4200/",
+        origin : "http://localhost:4200",
         credentials : true
     }))
 })

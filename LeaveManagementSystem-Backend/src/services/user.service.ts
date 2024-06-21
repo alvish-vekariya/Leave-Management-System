@@ -24,7 +24,7 @@ export class userService{
                 }
                 const token: string = jwt.sign(data, config.get("SECRETE_KEY"));
                 const temp = await userModel.findOneAndUpdate({_id:foundUser._id},{$set : {token: token}});
-                return {status : true, message :"user logged in!!", token: token};
+                return {status : true, message :"user logged in!!", token: token, username : foundUser.username, role: foundUser.role};
             }else{
                 return {status : false, message :"bad creadentials!!"};
             }
@@ -36,5 +36,10 @@ export class userService{
     async logout(userId : string): Promise<object>{
         await userModel.findOneAndUpdate({_id: userId},{$unset:{token : {$exists : true}}});
         return {message : "Logout Successfully!", status: true};
+    }
+
+    async getUser(username: string){
+        const data = await userModel.findOne({username: username});
+        return {data : data, status: true};
     }
 }

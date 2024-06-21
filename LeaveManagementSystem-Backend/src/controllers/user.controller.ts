@@ -4,7 +4,6 @@ import { Request, Response } from 'express';
 import { userService } from '../services';
 import { inject } from 'inversify';
 import { IuserLogin, IuserSignup } from '../interfaces';
-import mongoose from 'mongoose';
 
 @controller('/user')
 export class userController {
@@ -35,6 +34,16 @@ export class userController {
         try{
             const userId = req.query.userId as string;
             res.json(await this.userServices.logout(userId));
+        }catch(err: any){
+            res.json({status: false, message: err.message});
+        }
+    }
+
+    @httpGet('/getUser')
+    async getUser(req: Request, res: Response){
+        try{
+            const username = req.query.username as string;
+            res.json(await this.userServices.getUser(username));
         }catch(err: any){
             res.json({status: false, message: err.message});
         }

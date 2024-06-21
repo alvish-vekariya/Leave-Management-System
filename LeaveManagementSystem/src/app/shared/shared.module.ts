@@ -1,12 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { DatatableComponent } from './datatable/datatable.component';
+import { AgGridAngular } from 'ag-grid-angular';
+import { ActionsComponent } from './actions/actions.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    DatatableComponent,
+    ActionsComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    AgGridAngular
+  ],
+  exports:[
+    DatatableComponent
   ]
 })
-export class SharedModule { }
+export class SharedModule {}
