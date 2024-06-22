@@ -15,11 +15,11 @@ export interface IuserModel {
 
 export interface IleaveModel{
     _id ?: string,
-    userId : mongoose.ObjectId,
+    userId : mongoose.ObjectId | string,
     startDate : Date,
     endDate : Date,
     reason :  string,
-    status : string,
+    status ?: string,
     leaveType : string,
-    totalDays : number
+    totalDays ?: number
 }

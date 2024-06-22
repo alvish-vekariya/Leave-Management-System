@@ -17,7 +17,6 @@ export class DashboardComponent {
     const username = JSON.parse(localStorage.getItem('username') as string) as string;
     this.authService.getUser(username).subscribe((data: any)=>{
       this.userdata = data.data;
-      // console.log(this.userdata)
       this.getLeaveData(this.userdata._id as string);
     })
   }

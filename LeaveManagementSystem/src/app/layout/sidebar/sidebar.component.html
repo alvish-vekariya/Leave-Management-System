@@ -1,1 +1,7 @@
-<p>sidebar works!</p>
+<div class="text-center">
+    <h1>LMS</h1>
+    <hr>
+</div>
+<ul *ngFor="let item of sidebarComponents" class="navbar-nav text-center">
+    <li class="nav-item mt-1"><a routerLink="{{item.url}}" class="nav-link">{{item.urlname}}</a></li>
+</ul>

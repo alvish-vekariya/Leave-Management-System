@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IloginData } from 'src/app/core/interfaces/authentication.interface';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -23,11 +24,17 @@ export class LoginComponent {
     const loginCredentials = this.loginForm.value as IloginData;
     this.authService.login(loginCredentials).subscribe((data: any)=>{
       if(data.status == true){
-        alert(data.message);
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('islogged', 'true');
-        localStorage.setItem('username', JSON.stringify(this.loginForm.controls.username.value));
-        this.route.navigateByUrl(`/${data.role}/dashboard`);
+        Swal.fire({
+          icon: "success",
+          title: data.message,
+          showConfirmButton: false,
+          timer: 1000
+        }).then(()=>{
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('islogged', 'true');
+          localStorage.setItem('username', JSON.stringify(this.loginForm.controls.username.value));
+          this.route.navigateByUrl(`/${data.role}/dashboard`);
+        });
       }else{
         alert(data.message);
       }

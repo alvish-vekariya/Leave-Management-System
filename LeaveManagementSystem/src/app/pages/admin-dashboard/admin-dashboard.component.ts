@@ -16,6 +16,10 @@ export class AdminDashboardComponent {
   rowData = [];
 
   ngOnInit(){
+    this.getLeavesData();
+  }
+
+  getLeavesData(){
     this.authServices.getLeaves().subscribe((data: any)=>{
       // console.log(data.data);
       this.rowData = data.data
@@ -23,17 +27,42 @@ export class AdminDashboardComponent {
   }
 
   colDefs : ColDef[] = [
-    {field : "username"},
-    {field : "leaveType"},
-    {field : "startDate"},
-    {field : "endDate"},
-    {field : "reason"},
-    {field : "totalDays"},
-    {field : "status"},
-    {field : "actions", cellRenderer : ActionsComponent, cellRendererParams : {acceptfunction : (id: string)=>{ this.accept(id)}}}
+    {field : "username", flex: 1.5},
+    {field : "leaveType", flex: 1},
+    {field : "startDate", flex: 1},
+    {field : "endDate", flex: 1},
+    {field : "reason", flex: 2},
+    {field : "totalDays", flex: 1},
+    {field : "status", flex: 1},
+    {field : "actions", 
+      flex : 2,
+      cellRenderer : ActionsComponent, 
+      cellRendererParams : {
+        acceptfunction : (id: string)=>{ this.accept(id)},
+        rejectfunction : (id: string)=>{ this.reject(id)}
+      }}
   ] 
 
   accept(id: string){
-    console.log(id)
+    this.authServices.leaveApprove(id, "approved").subscribe((data:any)=>{
+      if(data.status == true){
+        alert(data.message);
+        this.getLeavesData();
+      }else{
+        alert(data.message);
+      }
+    })
   }
+
+  reject(id: string){
+    this.authServices.leaveApprove(id, "rejected").subscribe((data:any)=>{
+      if(data.status == true){
+        alert(data.message);
+        this.getLeavesData();
+      }else{
+        alert(data.message);
+      }
+    })
+  }
+
 }

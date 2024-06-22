@@ -1,0 +1,51 @@
+<div class="container-fluid p-0">
+    <div class="row p-0">
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="leaveform" (submit)="applyleave()" >
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select name="" id="leave" class="form-select" placeholder="select" formControlName="leaveType">
+                                        <option value="personal">Personal</option>
+                                        <option value="sick">Sick</option>
+                                    </select>
+                                    <label for="leave" class="form-label">Select Leave Type</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="date" name="" id="sdate" placeholder="startdate" class="form-control" formControlName="startDate">
+                                    <label for="sdate">Start Date</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="date" name="" id="edate" placeholder="enddate" class="form-control" formControlName="endDate">
+                                    <label for="edate">End Date</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <textarea name="" id="reason" placeholder="reason" class="form-control" formControlName="reason"></textarea>
+                                    <label for="reason">Reason</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <input type="submit" value="Apply" class="btn btn-primary" [disabled]="this.leaveform.invalid">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

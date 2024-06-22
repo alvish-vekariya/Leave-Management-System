@@ -13,7 +13,7 @@ export class AuthenticationService {
   constructor(private http :HttpClient) { }
 
   isLogged : boolean = JSON.parse(localStorage.getItem('islogged') as string | "false");
-  username: string = JSON.parse(localStorage.getItem('username') as string | '');
+  username: string = JSON.parse(localStorage.getItem('username') as string | "");
 
   signup(value: IsignupData){
     return this.http.post(`${this.url}signup`, value);
@@ -37,5 +37,17 @@ export class AuthenticationService {
 
   userLeaves(userId: string){
     return this.http.get(`${this.leaveurl}user/getLeaves?userId=${userId}`);
+  }
+
+  leaveApprove(id: string, status: string){
+    return this.http.put(`${this.leaveurl}admin/reviewLeave`,{leaveId: id, status:status});
+  }
+
+  applyleave(data : any){
+    return this.http.post(`${this.leaveurl}user/addLeaves`, data);
+  }
+
+  getCustomLeave(data: any){
+    return this.http.get(`${this.leaveurl}user/getLeavesCustom?userId=${data.userId}&status=${data.status}`);
   }
 }

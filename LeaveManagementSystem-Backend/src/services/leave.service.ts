@@ -33,6 +33,11 @@ export class leaveService{
                   $unwind: {
                     path: "$username"
                   }
+                },
+                {
+                  $match : {
+                    status : "pending"
+                  }
                 }
               ]
         );
@@ -45,8 +50,8 @@ export class leaveService{
     }
 
     async reviewLeave(leaveId : string,status: string){
-        await leaveModel.findOneAndUpdate({_id: leaveId, status: status});
-        if(status == 'approved'){
+        await leaveModel.findOneAndUpdate({_id: leaveId},{$set: {status: status}});
+        if(status == "approved"){
             return {status: true, message: 'leave approved!'};
         }else{
             return {status: true, message : 'leave rejected!'};
@@ -56,5 +61,19 @@ export class leaveService{
     async addLeave(bodyData: IleaveModel){
         await leaveModel.create(bodyData);
         return {status: true, message:"leaved applied!!"};
+    }
+
+    async userGetCustomleave(userId: string, status: string){
+      const data = await leaveModel.find({userId: userId, status: status});
+      return {status : true, data:data};
+    }
+
+    async adminGetRejected(){
+      const data = await leaveModel.find({status: 'rejected'});
+      return {status: true, data: data};
+    }
+    async adminGetApproved(){
+      const data = await leaveModel.find({status: 'approved'});
+      return {status: true, data: data};
     }
 }

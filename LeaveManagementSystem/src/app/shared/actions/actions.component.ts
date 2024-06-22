@@ -24,7 +24,7 @@ export class ActionsComponent implements ICellRendererAngularComp {
   }
 
   reject(){
-    console.log(this.params._id);
+    this.params.rejectfunction(this.params.data._id);
   }
 
 }

@@ -9,8 +9,16 @@ const routes: Routes = [
     component : DashboardComponent
   },
   {
+    path : 'employee',
+    loadChildren: ()=>import('./employee/employee.module').then(m=>m.EmployeeModule)
+  },
+  {
     path: 'admin/dashboard',
     component : AdminDashboardComponent
+  },
+  {
+    path : 'admin',
+    loadChildren : ()=>import('./admin/admin.module').then(m=>m.AdminModule)
   }
 ];
 
